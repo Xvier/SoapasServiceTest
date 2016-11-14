@@ -6,17 +6,18 @@ node('soapuislave') {
 
 	try{
 		stage 'Checkout'
+		def soapHome = '/opt/soapui/SoapUI-5.2.1/bin'
 		checkout scm
 		echo "Checked out the project"
 
-		//stage 'Start Bol Rest Test'
-		//sh "curl --form \"project=@Bol-soapui-project.xml\" --form \"suite=Bolsuite\" http://soapui:3000"
+		stage 'Start Soap Test'
+		sh "${soapHome}/testrunner.sh -J -j -A BLZ-soapui-project.xml"
 
-		//stage 'Start Soap Test'
-		//sh "curl --form \"project=@BLZ-soapui-project.xml\" --form \"suite=Banksuite\" http://soapui:3000"
+		stage 'Start Bol.com Rest Test'
+		sh "${soapHome}/testrunner.sh -J -j -A Bol-soapui-project.xml"
 
 		stage 'Archive Results'
-		//step([$class: 'JUnitResultArchiver', testResults: 'TEST-*.xml'])
+		step([$class: 'JUnitResultArchiver', testResults: 'TEST-*.xml'])
 
 	}
 	   catch (InterruptedException x) {
