@@ -6,7 +6,7 @@ node('soapuislave') {
 
 	try{
 		stage 'Checkout'
-		def soapHome = '/opt/soapui/SoapUI-5.2.1/bin'
+		def soapHome = '/opt/SoapUI-5.2.1/bin'
 		checkout scm
 		echo "Checked out the project"
 
