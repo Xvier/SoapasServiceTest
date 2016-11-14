@@ -1,6 +1,6 @@
 #!groovy
 
-node (soapuislave) {
+node('soapuislave') {
 
 	    currentBuild.result = "SUCCESS"
 
